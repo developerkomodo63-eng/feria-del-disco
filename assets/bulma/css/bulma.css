@@ -21567,9 +21567,13 @@ has-background-danger.is-hoverable:active {
 /* Custom landing styles */
 :root{
   --accent:#ffd54f;
-  --muted:#6b7280;
-  --bg:#f6f7fb;
+  /* Muted ajustado a un gris con mejor contraste */
+  --muted:#4b5563;
+  /* Unificar el blanco de fondo para evitar diferencias visibles */
+  --bg:#ffffff;
   --card-bg:#ffffff;
+  /* Color principal de encabezados para alto contraste (accesible) */
+  --heading-color:#0b1220;
 }
 html,body{height:100%;}
 body{
@@ -21578,17 +21582,27 @@ body{
   color:#222;
 }
 .hero.is-dark{
-  /* Softer gradient that fades into the page background to avoid
-     a hard black band between sections */
-  background: linear-gradient(135deg, #0f1724 0%, rgba(31,41,55,0.85) 45%, rgba(246,247,251,0) 100%);
+  /* Revertido al estilo oscuro original */
+  background: linear-gradient(135deg,#111827 0%,#1f2937 100%);
   color: #fff;
   padding:3.25rem 1.5rem;
 }
 .hero .title{ color:var(--accent); font-weight:700; font-size:2rem; }
 .navbar{ margin-top:0.75rem; }
 .navbar .button{ margin-left:0.5rem; }
-main{ padding:2rem 1.25rem; }
+.main{ padding:2rem 1.25rem; }
 .section{ padding-top:1.25rem; padding-bottom:1.25rem; }
+/* Ensure main and sections render over the same soft background
+   and avoid any abrupt dark banding between blocks */
+.main, main {
+  background: var(--bg);
+}
+.section{
+  background: transparent;
+}
+.container, .columns {
+  background: transparent;
+}
 .products-grid .columns{ gap:1rem; }
 .card{ background:var(--card-bg); border-radius:8px; box-shadow:0 8px 24px rgba(15,23,42,0.06); overflow:hidden; transition:transform .18s ease,box-shadow .18s ease; }
 .card:hover{ transform:translateY(-6px); box-shadow:0 20px 30px rgba(15,23,42,0.09); }
@@ -21598,6 +21612,17 @@ main{ padding:2rem 1.25rem; }
 .card .card-text{ text-align:center; color:var(--muted); margin-bottom:6px; }
 .image{ display:flex; align-items:center; justify-content:center; width:100%; }
 .image img{ max-width:90%; max-height:220px; height:auto; width:auto; object-fit:contain; display:block; }
+
+/* Accessibility: asegurar contraste suficiente en encabezados y títulos */
+h1,h2,h3,h4,h5,h6, .title, .subtitle, .card .card-title {
+  color: var(--heading-color);
+}
+.card .card-subtitle, .card .card-text {
+  color: var(--muted);
+}
+
+/* Mantener el color del título del hero tal como antes (acentuado sobre fondo oscuro) */
+.hero .title{ color:var(--accent); }
 
 /* make cards similar height (visual consistency) */
 .product-card{ display:flex; flex-direction:column; height:360px; }
@@ -21613,7 +21638,7 @@ main{ padding:2rem 1.25rem; }
 }
 
 /* Newsletter / form styles */
-.newsletter-card{ background:linear-gradient(180deg, #ffffff 0%, #fbfbfe 100%); border-radius:10px; padding:1.25rem; box-shadow:0 10px 30px rgba(2,6,23,0.06); }
+.newsletter-card{ background: var(--card-bg); border-radius:10px; padding:1.25rem; box-shadow:0 10px 30px rgba(2,6,23,0.06); }
 .newsletter-card .title{ margin-bottom:0.25rem; }
 .newsletter-form .input{ height:44px; border-radius:6px; }
 .newsletter-form .button{ height:44px; border-radius:6px; }
